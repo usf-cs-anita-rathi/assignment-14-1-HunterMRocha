@@ -1,29 +1,31 @@
+public class JumpIt
+{
+	public static int lowestTestCost(int[] x, int y, int z)
+	{
 
-public class JumpIt {
+		z += x[y];
+		if (y == x.length - 1)
+			return z;
+		else if (y == x.length - 2)
+			return lowestTestCost(x, y + 1, z);
+		else {
 
-	static int[] values = new int[] { 0, 3, 12, 21, 6, 8, 2, 17, 9, 1};
+			int path1 = lowestTestCost(x, y + 1, z);
+			int path2 = lowestTestCost(x, y + 2, z);
 
-	static int move1 = values[1];
-	static int move2 = values[1];
-
-	public static void cheapest() {
-		for (int i = 1; i < values.length; i++) {
-
-			if (move1 > values[i]) {
-				move2 = move1;
-				move1 = values[i];
-			}
-			if (move2 > values[i] && move1 != values[i]) {
-				move2 = values[i];
-			}
+			return Math.min(path1, path2);
 		}
 	}
 
-	public static void main(String[] args) {
-		cheapest();
-		System.out.println(move1);
-		System.out.println(move2);
-
+	public static void main(String args[]) 
+	{
+		int[] x = { 0, 3, 80, 6, 57, 10 };
+		int n = 0;
+		n = lowestTestCost(x, 0, n);
+		System.out.print("The cost to enter each column:");
+		for (int i = 0; i < x.length; i++)
+			System.out.print(x[i] + " ");
+		System.out.println();
+		System.out.println("Total cost: " + n);
 	}
-
 }
